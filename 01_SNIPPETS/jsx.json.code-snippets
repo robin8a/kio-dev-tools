@@ -1,0 +1,477 @@
+{
+	// Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+
+	"jsx bootstrap Button": {
+		"prefix": "jsx_render_boostrap_button",
+		"body": [
+			"<Button ",
+                "\tvariant='primary'", 
+                "\tsize='lg' ",
+                "\tblock",
+                "\tonClick={this.handleChangeObjectElement}",
+                "\tdisabled={this.state.isButtonDisable}",
+                ">$1</Button>"
+		]
+	},
+	"jsx bootstrap card group":{
+		"prefix": "",
+		"body": [
+			"<CardGroup>",
+				"\t<Card>",
+					"\t\t<Card.Img variant='top' src='holder.js/100px160' />",
+					"\t\t<Card.Body>",
+					"\t\t<Card.Title>Card title</Card.Title>",
+					"\t\t<Card.Text>",
+						"\t\t\tThis is a wider card with supporting text below as a natural lead-in to",
+						"\t\t\tadditional content. This content is a little bit longer.",
+					"\t\t</Card.Text>",
+					"\t\t</Card.Body>",
+					"\t\t<Card.Footer>",
+					"\t\t<small className='text-muted'>Last updated 3 mins ago</small>",
+					"\t\t</Card.Footer>",
+				"\t\t</Card>",
+			"</CardGroup>"
+		]
+	},
+	"jsx constructor bind function": {
+		"prefix": "jsx_contructor_bind_function",
+		"body": [
+			"this.handleChangeObjectElement = this.handleChangeObjectElement.bind(this)"
+		],
+		"description": "goes on constructor() {} "
+	},
+	"jsx constructor state": {
+		"prefix": "jsx_constructor_state",
+		"body": [
+			"constructor(props) {",
+				"\tsuper(props)",
+				"\tthis.state = {date: new Date()}",
+			"}"
+		],
+		"description": "goes on constructor() {} "
+	},
+	"jsx handle function": {
+		"prefix": "jsx_handle_function",
+		"body": [
+			"handleChangeObjectElement(event) {",
+				"console.log('event.value: ', event.value)",
+    			"console.log('event.value.id: ', event.value.id)",
+			"}"
+		],
+		"description": "simple to bind on constructor() {} function "
+	},
+	"jsx handle fat arrow async event": {
+		"prefix": "jsx_handle_fat_arrow_async_event",
+		"body": [
+			"handleChangeNewMOOC = async(event) => {",
+				"\tlet tempNewMOOC = this.state.newMOOC",
+				"\tif (event.target.name === 'name') {",
+					"\t\ttempNewMOOC.name = event.target.value",
+				"\t}",
+				"\tawait this.setState({newMOOC: tempNewMOOC})",
+				"\tawait this.validateCRUDMOOC()",
+			"}"
+		]
+	},
+	"jsx graphql config listener ": {
+		"prefix": "jsx_graphql_config_listener",
+		"body": [
+			"this.updateQuestionaryConfigListener = API.graphql(graphqlOperation(onUpdateQuestionaryConfig))",
+			".subscribe({",
+				"\tnext: questionaryConfigData => {",
+					"\t\tconst updatedQuestionaryConfig = questionaryConfigData.value.data.onUpdateQuestionaryConfig",
+					"\t\tthis.setState({",
+					"\t\tID: updatedQuestionaryConfig.id,",
+					"\t\tisShowReactCursorPositionLabel: updatedQuestionaryConfig.isShowReactCursorPositionLabel,",
+					"\t\tisCreateInteractionQuestionary: updatedQuestionaryConfig.isCreateInteractionQuestionary,",
+					"\t\tisCreateInteractionQuestionaryButton: updatedQuestionaryConfig.isCreateInteractionQuestionaryButton,",
+					"\t\tisDataClient: updatedQuestionaryConfig.isDataClient,",
+					"\t\texternalLink: updatedQuestionaryConfig.externalLink,",
+					"\t\tisExternalLink: updatedQuestionaryConfig.isExternalLink,",
+					"\t\tisCRUDButtonDisable: false,",
+				"\t}) ",
+				"\tconsole.log('componentDidMount updateQuestionaryConfigListener')",
+				"\t}",
+			"})"
+		],
+		"description": "goes on componentDidMount = async () => {}"
+	},
+	"jsx fat arrow component did mount async": {
+		"prefix": "jsx_fat_arrow_component_did_mount_async",
+		"body": [
+			"componentDidMount = async () => {",
+				"\tawait this.loadQuestionaries()",
+			"}"
+		]
+	},
+	"jsx graphql fat arrow load objects async": {
+		"prefix": "jsx_graphql_fat_arrow_load_objects_async",
+		"body": [
+			"loadQuestionaries = async () => {",
+				"\tconst result = await API.graphql(graphqlOperation(listQuestionarys, {authMode: 'API_KEY'}))",
+				"\tconsole.log(' loadQuestionary: ', result.data.listQuestionarys.items)",
+				"\tif (result.data.listQuestionarys.items.length > 0) {",
+				  "\t\tlet tempQuestions = result.data.listQuestionarys.items[0].questions.items",
+				  "\t\t// Ordering questions",
+				  "\t\ttempQuestions.sort((a, b) => (a.orderNumber > b.orderNumber) ? 1 : -1)",
+				  "\t\t// Ordering options",
+				  "\t\ttempQuestions.map( (question) => {",
+					  "\t\t\tquestion.options.items.sort((a, b) => (a.orderNumber > b.orderNumber) ? 1 : -1)",
+					  "\t\t\treturn question",
+				  "\t\t})",
+				  "\t\tlet tempQuestionaryID = result.data.listQuestionarys.items[0].id",
+				  "\t\tresult.data.listQuestionarys.items = tempQuestions",
+				  "\t\tthis.setState({",
+					  "\t\t\tquestionaries: result.data.listQuestionarys.items,",
+					  "\t\t\tisQuestionariesLoaded: true,",
+					  "\t\t\tquestions: tempQuestions,",
+					  "\t\t\tquestionaryID: tempQuestionaryID",
+				  "\t})",
+				"\t}",
+			"}"
+		]
+	},
+	"jsx graphql load objects to select items async":{
+		"prefix": "jsx_graphql_load_objects_to_select_items_async",
+		"body": [
+			"async loadGenresSelectItems() {",
+				"\tlet genresSelectItems = []",
+				"\tconst listGenresResult = await API.graphql(graphqlOperation(listGenres, {authMode: 'API_KEY'}))",
+				"\tif (listGenresResult.data.listGenres.items.length > 0) {",
+				  "\t\tlet tempGenres = listGenresResult.data.listGenres.items",
+				  "\t\t// Ordering genres by name",
+				  "\t\ttempGenres.sort((a, b) => (a.name > b.name) ? 1 : -1)",
+				  "\t\t// Ordering options",
+				  "\t\t// tempQuestions.map( (question) => {",
+				  "\t\t//     question.options.items.sort((a, b) => (a.orderNumber > b.orderNumber) ? 1 : -1)",
+				  "\t\t//     return question",
+				  "\t\t// })",
+				  "\t\tconsole.log('tempGenres: ', tempGenres)",
+				  "\t\t",
+				  "\t\ttempGenres.map( (genre) => {",
+					"\t\t\t// genresSelectItems.push(<option key={genre.id} value={genre.id}>{genre.name}</option>)",
+					"\t\t\tgenresSelectItems.push( {value: genre, label: genre.name})",
+					"\t\t\treturn genre",
+				  "\t\t})",
+				"\t",
+				"\t}",
+				"\tthis.setState({newMultimediaGenreSelectList: genresSelectItems})",
+				"\t",
+			  "}" 
+		]
+	},
+	"jsx graphql fat arrow create async call": {
+		"prefix": "jsx_graphql_fat_arrow_crud_async_call",
+		"body": [
+			"crudQuestion = async (question) => {",
+				"\tawait API.graphql(graphqlOperation(createQuestion, { input: question }))",
+				"\tawait API.graphql(graphqlOperation(updateQuestion, { input: question }))",
+			"}"
+		]
+	},
+	"jsx fat arrow handle change async object event ": {
+		"prefix": "jsx_fat_arrow_handle_change_async_object_event",
+		"body": [
+			"handleChangeQuestionQuestion = async(pQuestion, event) => {",
+				"\tlet tempQuestions = this.state.questions.map(question => {",
+				  "\t\tif (pQuestion.id === question.id) {",
+					"\t\t\tquestion.question = event.target.value",
+				  "\t\t}",
+				  "\t\treturn question",
+				"\t})",
+				"\tawait this.setState({questions: tempQuestions, isCRUDButtonDisable: false})",
+			"}"
+		]
+	},
+	"jsx render const style": {
+		"prefix": "jsx_render_const_style",
+		"body": [
+			"const paddingStyle = {",
+				"\tbackgroundColor: 'white',",
+				"\tpadding: '10px',",
+				"\tmarginTop: 30,",
+			"}"
+		]
+	},
+	"jsx render let state": {
+		"prefix": "jsx_render_let_state",
+		"body": [
+			"let {newDeal} = this.state"
+		]
+	},
+	"jsx render onChange event and objects":{
+		"prefix": "jsx_render_onChange_event_and_objects",
+		"body": [
+			"onChange={(e) => this.handleChangeObjectElement(question, option, e)}"
+		]	
+	},
+	"jsx render fat arrow map array": {
+		"prefix": "jsx_render_fat_arrow_map_array_handle",
+		"body": [
+			"const renderOptions = (question) => {",
+				"\t",
+				"\tif (question.options.items.length > 0) {",
+					"\t\t",
+				  	"\t\treturn (",
+						"\t\t\t",
+					  	"\t\t\t<div className='container'>",
+							"\t\t\t\t",
+							"\t\t\t\t{question.options.items.map(option => (",
+								"\t\t\t\t\t",
+						  		"\t\t\t\t\t<div className='row opciones-admin' key={option.id}>",
+							  		"\t\t\t\t\t\t",
+							  		"\t\t\t\t\t\t<div className='col-md-8 pregunta-admin'>",
+										"\t\t\t\t\t\t<input",
+											"\t\t\t\t\t\t\ttype='text'",
+											"\t\t\t\t\t\t\tplaceholder='Opción'",
+											"\t\t\t\t\t\t\tname='opción'",
+											"\t\t\t\t\t\t\trows='2'",
+											"\t\t\t\t\t\t\tcols='50'",
+											"\t\t\t\t\t\t\tvalue={option.title}",
+											"\t\t\t\t\t\t\tonChange={(e) => this.handleChangeQuestionOption(question, option, e)}",
+										"\t\t\t\t\t\t/>",
+									"\t\t\t\t\t\t</div>",
+								"\t\t\t\t\t",
+						  "\t\t\t\t</div>",
+						"\t\t\t))}",
+					  "\t\t</div>",
+					"\t\t",
+				  "\t\t)",
+				"\t}",
+				"\t",
+			"}"
+		]
+	},
+	"jsx render fat arrow handle change objects":{
+		"prefix": "jsx_render_fat_arrow_handle_change_objects",
+		"body": [
+			"handleChangeQuestionOption = async(pQuestion, pOption, event) => {",
+				"\t",
+			"}"
+		]
+	},
+	"jsx return render container simple form getting started":{
+		"prefix": "jsx_return_render_container_simple_form_getting_started",
+		"body": [
+			"return (",
+				"\t<Container>",
+					"\t\t<Form>",
+					"\t\t",
+					"\t\t{renderCRUDNewDeal()}",
+					"\t\t",
+						"\t\t\t<Button",
+							"\t\t\t\tvariant='primary'",
+							"\t\t\t\tsize='lg'",
+							"\t\t\t\tblock",
+							"\t\t\t\tonClick={this.handleCRUDQuestions}",
+							"\t\t\t\tdisabled={this.state.isCRUDButtonDisable}",
+						"\t\t\t>$1</Button>",
+						"\t\t\t",
+					"\t\t</Form>",
+				"\t</Container>",
+			")"
+		]
+
+	},
+	"jsx return render container form getting started":{
+		"prefix": "jsx_return_render_container_form_getting_started",
+		"body": [
+			"<Container>",
+				"\t<Form>",
+				"\t",
+				"\t{renderCRUDNewDeal()}",
+				"\t",
+				"\t<Row className='mb-3'>",
+					"\t\t",
+					"\t\t<Form.Group as={Col} controlId='formGridNewDealTitle'>",
+						"\t\t\t<Form.Label>Title</Form.Label>",
+						"\t\t\t<Form.Control",
+							"\t\t\t\ttype='text'",
+							"\t\t\t\tplaceholder='Awsome deal'",
+							"\t\t\t\tname='title'",
+							"\t\t\t\tvalue={newDeal.title}",
+							"\t\t\t\tonChange={(e) => this.handleChangeNewDeal(e)} />",
+					"\t\t</Form.Group>",
+					"\t\t",
+					"\t\t<Form.Group as={Col} controlId='formGridEmail'>",
+						"\t\t\t<Form.Label>Description</Form.Label>",
+						"\t\t\t<Form.Control", 
+						"\t\t\tas='textarea'", 
+						"\t\t\tplaceholder='50% discount' />",
+					"\t\t</Form.Group>",
+					"\t\t",
+				"\t</Row>",
+				"\t",
+				"\t<Button",
+					"\t\tvariant='primary'",
+					"\t\tsize='lg'", 
+					"\t\tblock",
+					"\t\tonClick={this.handleCRUDQuestions}",
+					"\t\tdisabled={this.state.isCRUDButtonDisable}",
+					"\t\t>$1</Button>",
+					"\t\t",
+				"\t</Form>",
+			"</Container>"
+		]
+
+	},
+	"jsx return render select list":{
+		"prefix": "jsx_return_render_select_list",
+		"body": [
+			"<Form.Group as={Col} controlId='formGridGenreSelectList'>",
+				"\t<Form.Label>Tipo</Form.Label>",
+				"\t<Select options={this.state.newMOOCTypeSelectList} onChange={this.handleChangeNewMOOCSelectListType} />",
+			"</Form.Group>"
+		]
+	},
+	"jsx return render find a value by id":{
+		"prefix": "jsx_return_render_find_a_value_by_id",
+		"body": [
+			"{this.state.newMultimediaGenreSelectList.find(genre => genre.value.id === multimedia.genreID).value.name}"
+		]
+
+	},
+	"jsx render fat arrow render const getting started":{
+		"prefix": "jsx_render_fat_arrow_render_const_getting_started",
+		"body": [
+			"let {newDeal} = this.state",
+			"",
+			"const renderCRUDNewDeal = () => {",
+				"\treturn (",
+					"\t\t<Container>",
+						"\t\t\t<h3>CRUD Deal</h3>",
+						"\t\t\t",
+						"\t\t\t<Row className='mb-3'>",
+							"\t\t\t\t",
+							"\t\t\t\t<Form.Group as={Col} controlId='formGridNewDealTitle'>",
+								"\t\t\t\t\t<Form.Label>Title</Form.Label>",
+								"\t\t\t\t\t<Form.Control",
+									"\t\t\t\t\t\ttype='text'",
+									"\t\t\t\t\t\tplaceholder='Awsome deal'",
+									"\t\t\t\t\t\tname='title'",
+									"\t\t\t\t\t\tvalue={newDeal.title}",
+									"\t\t\t\t\t\tonChange={(e) => this.handleChangeNewDeal(e)} />",
+							"\t\t\t\t</Form.Group>",
+							"\t\t\t\t",
+							"\t\t\t\t<Form.Group as={Col} controlId='formGridEmail'>",
+								"\t\t\t\t\t<Form.Label>Description</Form.Label>",
+								"\t\t\t\t\t<Form.Control",
+								"\t\t\t\t\tas='textarea'", 
+								"\t\t\t\t\tplaceholder='50% discount' />",
+							"\t\t\t\t</Form.Group>",
+							"\t\t\t\t",
+						"\t\t\t</Row>",
+						"\t\t\t",
+						"\t\t\t<Row>",
+							"\t\t\t\t<Button variant='primary' size='sm' onClick={(e) => this.addNewQuestion(e)} disabled={this.state.isAddNewQuestionDisable}>",
+								"\t\t\t\t$1",
+							"\t\t\t\t</Button>",
+						"\t\t\t</Row>",
+						"\t\t\t",
+					"\t\t</Container>",
+				"\t)",
+			"}"
+		]
+	},
+	"jsx import bootstrap.min.css ":{
+		"prefix": "jsx_import_bootstrap_min_css",
+		"body": [
+			"// Bootstrap",
+			"import 'bootstrap/dist/css/bootstrap.min.css'"
+		],
+		"description": "first: npm install react-bootstrap@next bootstrap@5.1.0 and goes on app.js"
+	},
+	"jsx import Bootstrap":{
+		"prefix": "jsx_import_bootstrap_components",
+		"body": [
+			"// Bootstrap",
+			"import { Container, Button } from 'react-bootstrap'"
+		]	
+	},
+	"jsx import data json":{
+		"prefix": "jsx_import_data_json",
+		"body": [
+			"// Data samples",
+			"import DATA_VIDEOS_JSON from '../../data/videos.json'"
+		]
+	},
+	"jsx import image":{
+		"prefix": "jsx_import_image",
+		"body": [
+			"// Import images",
+			"import LOGO from './logo.png'"
+		]
+	},
+	"jsx import component":{
+		"prefix": "jsx_import_component",
+		"body": [
+			"import Component from './components'"
+		]
+	},
+	"jsx_import_graphql_API_graphqlOperation":{
+		"prefix": "jsx_import_graphql_API_graphqlOperation",
+		"body": [
+			"import { API, graphqlOperation } from 'aws-amplify'"
+		]
+	},
+	"jsx import graphql subscriptions":{
+		"prefix": "jsx_import_graphql_subscriptions",
+		"body": [
+			"import { onUpdateQuestionaryConfig } from '../../../graphql/subscriptions'"
+		]
+	},
+	"jsx import graphql queries":{
+		"prefix": "jsx_import_graphql_queries",
+		"body": [
+			"import { listQuestionarys} from '../../../graphql/queries'"
+		]
+	},
+	"jsx json data sample":{
+		"prefix": "jsx_json_data_sample",
+		"body": [
+			"[,",
+				"{",
+					"'id': 1,",
+					"'parentsVideosIDs': [],",
+					"'childrenVideosIDs': [2,3],",
+					"'startVideoOnSecond': 0,",
+					"'videoURL': 'https://kio-mk-sl-lms-videos.s3.amazonaws.com/001_MATEMATICAS.mp4', ",
+					"'format': 'mp4',",
+					"'played': 0,",
+					"'loaded': 0,",
+					"'pip': false,",
+					"'category': 'MATEMATICAS'",
+				"}",
+			"]"
+		]		
+	},
+	"jsx aws amplify storage generate download link":{
+		"prefix": "jsx_aws_amplify_storage_generate_download_link",
+		"body": [
+			"generateDownloadLink = () => {",
+				"\tStorage.get(this.state.videoSrc, { expires: 60 })",
+					"\t\t.then(result => { ",
+						"\t\t\tthis.setState( {downloadVideoLink: result})",
+						"\t\t\tconsole.log('### generateDownloadLink downloadVideoLink: ', this.state.downloadVideoLink)",
+					"\t\t})",
+					"\t\t.catch(err => console.log(err))",
+			 "}"
+		]
+
+	}
+}
