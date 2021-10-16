@@ -71,6 +71,17 @@
 			"handleChangeObjectElement(event) {",
 				"console.log('event.value: ', event.value)",
     			"console.log('event.value.id: ', event.value.id)",
+			"}",
+			"",
+			"handleChangeSelectListMall= async(event) => {",
+				"\tconsole.log(event)",
+				"\tthis.setState({",
+					"\t\tmallSelected: event.value",
+				"\t})",
+			"}",
+			"",
+			"async handleChangeObjectElement() {",
+				"\tconsole.log('handleChangeObjectElement: ')",
 			"}"
 		],
 		"description": "simple to bind on constructor() {} function "
@@ -78,7 +89,7 @@
 	"jsx handle fat arrow async event": {
 		"prefix": "jsx_handle_fat_arrow_async_event",
 		"body": [
-			"handleChangeNewMOOC = async(event) => {",
+			"handleChangeObjectElement = async(event) => {",
 				"\tlet tempNewMOOC = this.state.newMOOC",
 				"\tif (event.target.name === 'name') {",
 					"\t\ttempNewMOOC.name = event.target.value",
@@ -336,7 +347,8 @@
 			"<Form.Group as={Col} controlId='formGridGenreSelectList'>",
 				"\t<Form.Label>Tipo</Form.Label>",
 				"\t<Select options={this.state.newMOOCTypeSelectList} onChange={this.handleChangeNewMOOCSelectListType} />",
-			"</Form.Group>"
+			"</Form.Group>",
+			"<Select options={this.state.newMultimediaSelectList} onChange={(e) => this.handleChangeSelectListNewMultimediaParent(multimedia, e)} />"
 		]
 	},
 	"jsx return render find a value by id":{
@@ -473,5 +485,77 @@
 			 "}"
 		]
 
+	},
+	"jsx graphql query filter by date":{
+		"prefix": "jsx_graphql_query_filter_by_date",
+		"body": [
+			"const filter_by_date = {",
+				"filter: { ",
+					"regEpoch: {",
+						"between: [pStartDate.unix(), pEndDate.unix()]",
+					"}",
+				"},",
+				"limit: 100000",
+			"}",
+			"",
+			"const result = await API.graphql(graphqlOperation(listRegisters, filter_by_date));"
+		]
+	},
+	"jsx render ipfs image":{
+		"prefix": "jsx_render_ipfs_image",
+		"body": [
+			"<img src='https://ipfs.io/ipfs/QmY4x4vqe28hFypVjhWFBoo9NHWANPG8UG9aPSVPKvbiYs' alt='alt_test'/>"
+		]
+	},
+	"import react select":{
+		"prefix": "jsx_import_react_select",
+		"body": [
+			"import Select from 'react-select'"
+		]
+	},
+	"jsx delete property from an object":{
+		"prefix": "jsx_delete_property_from_an_object",
+		"body": [
+			"delete Employee.firstname"
+		]
+	},
+	"jsx render get object from_state":{
+		"prefix": "jsx_render_get_object_from_state",
+		"body": [
+			"const { multimedias } = this.state"
+		]
+	},
+	"jsx graphql query filter by":{
+		"prefix": "jsx_graphql_query_filter_by",
+		"body": [
+			"const filterByCity = {",
+				"\tfilter: { ",
+					"\t\tcityID: {",
+						"\t\t\teq: pCity",
+					"\t\t}",
+				"\t},",
+				"\tlimit: 200",
+			"}",
+			"",
+			  "const result = await API.graphql(graphqlOperation(listLocations, filterByCity))",
+			  "let tempListSelectLocation = result.data.listLocations.items.map((location) =>{",
+				  "\tlet tempSelectLocationItem = { value: location.id, label: location.title }",
+				  "\treturn tempSelectLocationItem",
+			  "})",
+			  "this.setState({listSelectLocation: tempListSelectLocation})"
+		]
+	},
+	"jsx another promise resolve":{
+		"prefix": "jsx_another_promise_resolve",
+		"body": [
+			"var original = Promise.resolve(33);",
+			"var cast = Promise.resolve(original);",
+			"cast.then(function(value) {",
+				"\tconsole.log('value: ' + value);",
+			"});",
+			"console.log('original === cast ? ' + (original === cast));"
+		]
 	}
+
+
 }
