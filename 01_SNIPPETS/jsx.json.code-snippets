@@ -580,5 +580,39 @@
 		"body": [
 			"<b>Publisher status:</b> {isConnected ? 'connected' : 'Not connected'}"
 		]
+	},
+	"jsx auth credentials":{
+		"prefix": "jsx_auth_credentials",
+		"body": [
+			"import Amplify, { PubSub, Auth } from 'aws-amplify'",
+			"",
+			"\tcomponentDidMount = async () => {",
+        		"\t\tAuth.currentCredentials().then((info) => {",
+            	"\t\tconst cognitoIdentityId = info.identityId",
+            	"\t\tconsole.log('cognitoIdentityId: ', cognitoIdentityId)",
+          	"\t})",
+			"}"
+		]
+	},
+	"jsx auth function load actual logged user":{
+		"prefix": "jsx_auth_function_load_actual_logged_user",
+		"body": [
+			"\tasync loadActualLoggedUser() {",
+				"\t\tconst actualUser = await Auth.currentAuthenticatedUser()",
+				"\t\tif (actualUser !== undefined) {",
+					"\t\t\tconst filterByUserID = {",
+						"t\t\t\tid: actualUser.attributes.sub",
+					"\t\t}",
+					"\t\t",
+					"\t\tconst result = await API.graphql(graphqlOperation(getUser, filterByUserID))",
+					"t\t",
+					"\t\t\tthis.setState({",
+						"\t\t\t\tuser: result.data.getUser",
+					"\t\t\t})",
+				"",	
+				"\t\t}",
+				"",
+			"\t}"
+		]
 	}
 }
