@@ -130,6 +130,14 @@
 			"}"
 		]
 	},
+	"jsx fat arrow componentwill unmount async": {
+		"prefix": "jsx_fat_arrow_component_will_unmount_async",
+		"body": [
+			"componentWillUnmount = async () => {",
+				"\tawait this.loadQuestionaries()",
+			"}"
+		]
+	},
 	"jsx graphql fat arrow load objects async": {
 		"prefix": "jsx_graphql_fat_arrow_load_objects_async",
 		"body": [
@@ -555,7 +563,22 @@
 			"});",
 			"console.log('original === cast ? ' + (original === cast));"
 		]
+	},
+	"jsx handle on change select list":{
+		"prefix": "jsx_handle_on_change_select_list",
+		"body": [
+			"handleChangeNewMOOCSelectListGenre(event) {",
+				"\tlet tempNewMultimedia = this.state.newMultimedia",
+				"\ttempNewMultimedia.genreID = event.value.id",
+				"\tthis.setState({newMultimedia: tempNewMultimedia})",
+				"\tthis.validateAddNewMultimedia()",
+			"}"
+		]
+	},
+	"jsx inline if":{
+		"prefix": "jsx_inline_if",
+		"body": [
+			"<b>Publisher status:</b> {isConnected ? 'connected' : 'Not connected'}"
+		]
 	}
-
-
 }
