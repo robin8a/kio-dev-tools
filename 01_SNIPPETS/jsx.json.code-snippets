@@ -601,11 +601,11 @@
 				"\t\tconst actualUser = await Auth.currentAuthenticatedUser()",
 				"\t\tif (actualUser !== undefined) {",
 					"\t\t\tconst filterByUserID = {",
-						"t\t\t\tid: actualUser.attributes.sub",
+						"\t\t\t\tid: actualUser.attributes.sub",
 					"\t\t}",
 					"\t\t",
 					"\t\tconst result = await API.graphql(graphqlOperation(getUser, filterByUserID))",
-					"t\t",
+					"",
 					"\t\t\tthis.setState({",
 						"\t\t\t\tuser: result.data.getUser",
 					"\t\t\t})",
@@ -613,6 +613,99 @@
 				"\t\t}",
 				"",
 			"\t}"
+		]
+	},
+	"jsx redirect":{
+		"prefix": "jsx_redirect",
+		"body": [
+			"this.props.history.push('/admon')"
+		]
+	},
+	"jsx export class with authenticator simple":{
+		"prefix": "jsx_export_class_with_authenticator_simple",
+		"body": [
+			"// Auth",
+			"import { withAuthenticator } from 'aws-amplify-react'",
+			"",
+			"export default withAuthenticator(Admon)"
+		]
+	},
+	"jsx_export_class_with_authenticator_simple":{
+		"prefix": "jsx_export_class_with_authenticator_complete",
+		"body": [
+			"export default withAuthenticator(Admon, {",
+				"\ttheme: Bootstrap,",
+				"\tincludeGreetings: true,",
+				"\tsignUpConfig: {",
+					"\t\thiddenDefaults: ['phone_number'],",
+					"\t\tsignUpFields: [",
+					"\t\t{ label: 'Name', key: 'name', required: true, type: 'string' }",
+				  "\t]",
+			  "}})"
+		]
+	},
+	"jsx component did update":{
+		"prefix": "jsx_component_did_update",
+		"body": [
+			"async componentDidUpdate() { }"
+		]
+	},
+	"jsx render image":{
+		"prefix": "jsx_render_image",
+		"body": [
+			"import SuanLogo from './_images/suan_logo.jpg'",
+			"",
+			"<Card style={{ width: '18rem' }}>",
+            	"<Card.Img variant='top' src={SuanLogo} />",
+            "</Card>"
+		]
+	},
+	"jsx handle on change input form":{
+		"prefix": "jsx_handle_on_change_input_form",
+		"body": [
+			"this.handleOnChangeInputForm = this.handleOnChangeInputForm.bind(this)",
+			"",
+			"handleOnChangeInputForm = async(event) => {",
+				"\tif (event.target.name === 'desiredSubscriptionTopic') {",
+					"\t\tawait this.setState({desiredSubscriptionTopic: event.target.value})",
+				"\t}",
+			"}",
+			"",
+			"onChange={(e) => this.handleOnChangeInputForm(e)}"
+		]
+	},
+	"jsx render bootstrap button with icon":{
+		"prefix": "jsx_render_bootstrap_button_with_icon",
+		"body": [
+			"npm i react-bootstrap-icons",
+			"",
+			"// Import React Bootstrap Icons",
+			"import { CloudUpload } from 'react-bootstrap-icons'",
+			"",
+			"<Button ",
+				"\tvariant='outline-primary'",
+				"\tblock",
+				"\tonClick={this.handleChangeObjectElement}",
+			"><CloudUpload></CloudUpload>Send</Button>"
+		]
+	},
+	"jsx render alert":{
+		"prefix": "jsx_render_alert",
+		"body": [
+			"[",
+				"\t'primary',",
+				"\t'secondary',",
+				"\t'success',",
+				"\t'danger',",
+				"\t'warning',",
+				"\t'info',",
+				"\t'light',",
+				"\t'dark',",
+			  "].map((variant, idx) => (",
+				"\t<Alert key={idx} variant={variant}>",
+					"\t\tThis is a {variant} alert—check it out!",
+				"\t</Alert>",
+			  "))"
 		]
 	}
 }
