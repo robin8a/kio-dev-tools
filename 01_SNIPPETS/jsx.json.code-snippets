@@ -51,7 +51,8 @@
 	"jsx constructor bind function": {
 		"prefix": "jsx_contructor_bind_function",
 		"body": [
-			"this.handleChangeObjectElement = this.handleChangeObjectElement.bind(this)"
+			"this.handleChangeObjectElement = this.handleChangeObjectElement.bind(this)",
+			"this.handleOnChangeInputForm = this.handleOnChangeInputForm.bind(this)"
 		],
 		"description": "goes on constructor() {} "
 	},
@@ -82,6 +83,15 @@
 			"",
 			"async handleChangeObjectElement() {",
 				"\tconsole.log('handleChangeObjectElement: ')",
+			"}",
+			"",
+			"handleOnChangeInputForm = async(event) => {",
+				"\tif (event.target.name === 'desiredSubscriptionTopic') {",
+					"\t\tawait this.setState({desiredSubscriptionTopic: event.target.value})",
+				"\t}",
+				"\tif (event.target.name === 'desiredPublishTopic') {",
+					"\t\tawait this.setState({desiredPublishTopic: event.target.value})",
+				"\t}",
 			"}"
 		],
 		"description": "simple to bind on constructor() {} function "
@@ -324,7 +334,7 @@
 							"\t\t\t\tplaceholder='Awsome deal'",
 							"\t\t\t\tname='title'",
 							"\t\t\t\tvalue={newDeal.title}",
-							"\t\t\t\tonChange={(e) => this.handleChangeNewDeal(e)} />",
+							"\t\t\t\tonChange={(e) => this.handleOnChangeInputForm(e)} />",
 					"\t\t</Form.Group>",
 					"\t\t",
 					"\t\t<Form.Group as={Col} controlId='formGridEmail'>",
@@ -385,7 +395,7 @@
 									"\t\t\t\t\t\tplaceholder='Awsome deal'",
 									"\t\t\t\t\t\tname='title'",
 									"\t\t\t\t\t\tvalue={newDeal.title}",
-									"\t\t\t\t\t\tonChange={(e) => this.handleChangeNewDeal(e)} />",
+									"\t\t\t\t\t\tonChange={(e) => this.handleOnChangeInputForm(e)} />",
 							"\t\t\t\t</Form.Group>",
 							"\t\t\t\t",
 							"\t\t\t\t<Form.Group as={Col} controlId='formGridEmail'>",
