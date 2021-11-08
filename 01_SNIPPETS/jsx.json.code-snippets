@@ -52,7 +52,8 @@
 		"prefix": "jsx_contructor_bind_function",
 		"body": [
 			"this.handleChangeObjectElement = this.handleChangeObjectElement.bind(this)",
-			"this.handleOnChangeInputForm = this.handleOnChangeInputForm.bind(this)"
+			"this.handleOnChangeInputForm = this.handleOnChangeInputForm.bind(this)",
+			"this.handleMultimediaFile = this.handleMultimediaFile.bind(this)"
 		],
 		"description": "goes on constructor() {} "
 	},
@@ -716,6 +717,58 @@
 					"\t\tThis is a {variant} alert—check it out!",
 				"\t</Alert>",
 			  "))"
+		]
+	},
+	"":{
+		"prefix": "",
+		"body": [
+			"// AWS S3 Storage",
+			"import { Storage } from 'aws-amplify'",
+			"",
+			"this.handleMultimediaFile = this.handleMultimediaFile.bind(this)",
+			"",
+			"handleMultimediaFile = async (event) => {",
+				"\tconst { target: { files } } = event;",
+				"\tconst [file,] = files || [];",
+				"\tif (!file) {",
+					"\t\treturn",
+				"\t}",
+				"\tlet fileNameSplitByDotfileArray = file.name.split('.')",
+				"\tlet newMultimediaId = uuidv4()",
+				"\t// Getting extension",
+				"\tlet newMultimediaExtension = fileNameSplitByDotfileArray[fileNameSplitByDotfileArray.length-1]",
+				"\tlet newMultimediaName = newMultimediaId + '.' + newMultimediaExtension",
+				"",
+				"\tthis.setState({newMultimediaIsUploadingFile: true})",
+				"",
+				"\tStorage.put(newMultimediaName, file).then(() => {",
+				  "\t\tlet tempNewMultimedia = this.state.newMultimedia",
+				  "\t\ttempNewMultimedia.id = newMultimediaId",
+				  "\t\ttempNewMultimedia.multimediaURL = newMultimediaName",
+				  "\t\ttempNewMultimedia.format = file.type",
+				  "\t\tthis.setState({newMultimedia: tempNewMultimedia, newMultimediaIsUploadingFile: false})",
+				  "\t\tthis.validateAddNewMultimedia()",
+				"\t})",
+				"",
+			  "}",
+			  "",
+			  	"<Row className='mb-3'> ",
+                  "\t<Form.Group controlId='formFile' className='mb-3'>",
+                    "\t\t<Form.Label>Archivo Multimedia</Form.Label>",
+                    "\t\t<Form.Control type='file' onChange={this.handleMultimediaFile} />",
+                  "\t</Form.Group>",
+            	"</Row>",
+				"",
+                "{renderIsNewMultimediaIsUploadingFile()}",
+				"",
+				"const renderIsNewMultimediaIsUploadingFile = () => {",
+					"\tif (this.state.newMultimediaIsUploadingFile) {",
+					  "\t\treturn (",
+						"\t\t\t<Spinner animation='border' variant='primary' />",
+					  "\t\t)",
+					"\t}",
+					"",
+				  "}"
 		]
 	}
 }
