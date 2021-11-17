@@ -719,12 +719,14 @@
 			  "))"
 		]
 	},
-	"":{
-		"prefix": "",
+	"jsx handle multimedia file":{
+		"prefix": "jsx_handle_multimedia_file",
 		"body": [
 			"// AWS S3 Storage",
 			"import { Storage } from 'aws-amplify'",
-			"",
+			"import { uuidv4 } from 'uuidv4'",
+			"// State and Bind",
+			"newMultimedia: {id: null, title: '', multimediaURL: '', format: ''}",
 			"this.handleMultimediaFile = this.handleMultimediaFile.bind(this)",
 			"",
 			"handleMultimediaFile = async (event) => {",
@@ -769,6 +771,23 @@
 					"\t}",
 					"",
 				  "}"
+		]
+	},
+	"jsx date timestamp epoch":{
+		"prefix": "jsx_date_timestamp_epoch",
+		"body": [
+			"// DataTypes: https://docs.aws.amazon.com/appsync/latest/devguide/scalars.html ",
+			"// Examples: https://momentjs.com/timezone/docs/#/zone-object/name/",
+			"",
+			"npm i moment-timezone",
+			"",
+			"import 'moment-timezone'",
+			"",
+			"const moment = require('moment-timezone')",
+      		"const dateNew = moment.tz(new Date().toISOString(), 'America/Lima').format()",
+			"",
+      		"var tempregCreatedAt = moment.tz(dateNew, 'America/Lima')",
+      		"var newEpoch = tempregCreatedAt.unix()"
 		]
 	}
 }
