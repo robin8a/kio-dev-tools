@@ -373,7 +373,9 @@
 	"jsx return render find a value by id":{
 		"prefix": "jsx_return_render_find_a_value_by_id",
 		"body": [
-			"{this.state.newMultimediaGenreSelectList.find(genre => genre.value.id === multimedia.genreID).value.name}"
+			"{this.state.newMultimediaGenreSelectList.find(genre => genre.value.id === multimedia.genreID).value.name}",
+			"// The findIndex() method returns the index of the first element in the array that satisfies the provided testing function. Otherwise, it returns -1, indicating that no element passed the test.",
+			"{this.state.newMultimediaGenreSelectList.findIndex(genre => genre.value.id === multimedia.genreID).value.name}"
 		]
 
 	},
@@ -787,7 +789,74 @@
       		"const dateNew = moment.tz(new Date().toISOString(), 'America/Lima').format()",
 			"",
       		"var tempregCreatedAt = moment.tz(dateNew, 'America/Lima')",
-      		"var newEpoch = tempregCreatedAt.unix()"
+      		"var newEpoch = tempregCreatedAt.unix()",
+			"",
+			"const newDateYYYYMMDDMoment = moment.tz(new Date().toISOString(), 'YYYY-MM-DD', 'America/Lima').format()",
+        	"const newDateYYYYMMDD = newDateYYYYMMDDMoment.split('T')[0]"
+		]
+	},
+	"jsx render table":{
+		"prefix": "jsx_render_table",
+		"body": [
+			"<Table striped bordered hover>",
+				"<thead>",
+					"<tr>",
+						"<th>Título</th>",
+						"<th>URL</th>",
+						"<th>Formato</th>",
+						"<th>Usuario</th>",
+						"<th>Categoría</th>",
+						"<th>Cambiar Padre</th>",
+						"<th>Padre Seleccionado</th>",
+					"</tr>",
+				"</thead>",
+				"<tbody>",
+				"{this.state.newMOOC.multimedias.map(multimedia => (",
+					"<tr key={multimedia.id}>",
+						"<td>",
+							"{multimedia.title}",
+						"</td>",
+						"<td>",
+							"{multimedia.multimediaURL}",
+						"</td>",
+						"<td>",
+							"{multimedia.format}",
+						"</td>",
+						"<td>",
+							"{this.state.userName}",
+						"</td>",
+						"<td>",
+							"{this.state.newMultimediaGenreSelectList.find(genre => genre.value.id === multimedia.genreID).value.name}",
+						"</td>",
+						"<td>",
+							"<Select options={this.state.newMultimediaSelectList} onChange={(e) => this.handleChangeSelectListNewMultimediaParent(multimedia, e)} />",
+						"</td>",
+						"<td>",
+							"{/* {this.state.newMultimediaSelectList.find(multimediaList => multimediaList.value.id === multimedia.parentMultimediaID).title} */}",
+							"{multimedia.parentMultimediaID}",
+						"</td>",
+					"</tr>",
+				"))}",
+				"</tbody>",
+          	"</Table>"
+		]
+	},
+	"jsx inline style":{
+		"prefix": "jsx_inline_style",
+		"body": [
+			"style={{width: 50, height: 'auto'}}"
+		]
+	},
+	"jsx render bootstrap col row":{
+		"prefix": "jsx_render_bootstrap_col_row",
+		"body": [
+			"<Row xs={1} md={2} lg={3}>",
+                "\t{this.state.gallery.map(gall => (",
+                    "\t\t<Col>",
+                        "\t\t\t{renderArt(gall)}",
+                    "\t\t</Col>",
+                "\t))}",
+            "</Row>"
 		]
 	}
 }
