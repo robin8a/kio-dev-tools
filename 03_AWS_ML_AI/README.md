@@ -1,0 +1,5 @@
+# References
+- https://aws.amazon.com/machine-learning/learn/?trk=em_a134p000007CzKbAAK&trkCampaign=GLBL-FY22-Q1-GC-400-Dev_2-Developer-upskilling-page&sc_channel=em&sc_campaign=GLOBAL_GC_LN_gc-400-ML-Ramp-2-3_01032022.Dev%20Email%202%20-%20Developer%20Upskilling:%20Learn%20ML%20page%20(final)&sc_medium=em_451368&sc_outcome=Global_Marketing_Campaigns&sc_geo=LATAM&sc_content=AWS_Webpage&mkt_tok=MTEyLVRaTS03NjYAAAGCOjNUBSkaY2ERNLB0R4YxsaUGhzt36oYwczlKS8trLeQlPoS5teCtkuA6HpWg2EuNNw-2LC2NjsLM8mF6oYi4V6YhAJTjaNYTmLzq8q8tnEajQosryP7t
+- https://pages.awscloud.com/SageMakerFridays.html?trk=el_a134p000007C6Q1AAK&trkCampaign=GLBL-FY21-Q3-SageMaker-Fridays&sc_channel=el&sc_campaign=splash.SageMakerFridays&sc_outcome=AIML_Digital_Marketing
+- https://aws.amazon.com/machine-learning/scholarship/?sc_icampaign=aws-ai-ml-scholarship-program&sc_ichannel=ha&sc_icontent=awssm-9599_launch_reinvent21&sc_iplace=ribbon&trk=ha_awssm-9599_launch_reinvent21
+- [AWS ML Hackaton](https://awsdisasterresponse.devpost.com/) 
